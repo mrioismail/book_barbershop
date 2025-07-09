@@ -1,0 +1,65 @@
+/* Agar tombol radio tampil rapi dan horizontal */
+#jam-options {
+   flex-wrap: wrap;
+}
+.btn-check:checked + .btn-outline-primary {
+   background-color: #0d6efd;
+   color: white;
+}
+
+/* membuat tombol booking */
+.btn-book-fixed {
+   position: fixed;
+   bottom: 40px;
+   left: 50%;
+   transform: translateX(-50%);
+   background-color: #212529;
+   color: white;
+   padding: 12px 30px;
+   border-radius: 999px;
+   font-weight: 500;
+   font-size: 14px;
+   text-decoration: none;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+   z-index: 9999;
+   transition: background-color 0.3s ease;
+}
+
+.btn-book-fixed:hover {
+   background-color: #343a40;
+   color: #fff;
+}
+
+/* footer */
+.footer-section {
+   font-size: 14px;
+}
+
+.footer-section h5,
+.footer-section h6 {
+   color: #ffffff;
+   font-size: 16px;
+   font-weight: 600;
+   margin-bottom: 10px;
+}
+
+.footer-section ul li,
+.footer-section ul li a,
+.footer-section p,
+.footer-section i {
+   color: #bbbbbb;
+   font-size: 12px;
+}
+
+.footer-section a:hover {
+   color: #ffffff;
+   text-decoration: underline;
+}
+
+.footer-section a i {
+   font-size: 18px;
+}
+
+.rionel {
+   color: #ffffff; /* Warna biru untuk nama Rionel */
+}
