@@ -54,6 +54,16 @@ $routes->group('', ['filter' => 'adminFilter'], function ($routes) {
     $routes->get('admin/capster/delete/(:num)', 'Admin\Capster::delete/$1');
 });
 
+// CRUD for capster layanan
+$routes->group('', ['filter' => 'adminFilter'], function ($routes) {
+    $routes->get('admin/capster_layanan', 'Admin\CapsterLayanan::index');
+    $routes->get('admin/capster_layanan/create', 'Admin\CapsterLayanan::create');
+    $routes->post('admin/capster_layanan/store', 'Admin\CapsterLayanan::store');
+    $routes->get('admin/capster_layanan/edit/(:num)', 'Admin\CapsterLayanan::edit/$1');
+    $routes->post('admin/capster_layanan/update/(:num)', 'Admin\CapsterLayanan::update/$1');
+    $routes->get('admin/capster_layanan/delete/(:num)', 'Admin\CapsterLayanan::delete/$1');
+});
+
 $routes->group('', ['filter' => 'adminFilter'], function ($routes) {
     // CRUD for jadwal
     $routes->get('admin/jadwal', 'Admin\Jadwal::index');

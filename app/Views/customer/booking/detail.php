@@ -15,7 +15,7 @@
             <div class="w-16 h-16 bg-green-500 mx-auto rounded-full flex items-center justify-center text-white text-3xl">
                 ✓
             </div>
-            <h2 class="text-2xl font-semibold mt-4">Rp<?= number_format($layanan['harga'], 0, ',', '.'); ?></h2>
+            <h2 class="text-2xl font-semibold mt-4">Rp<?= number_format($capsterLayanan[0]['harga'], 0, ',', '.'); ?></h2>
             <p class="text-green-600 mt-2">Booking Berhasil!</p>
         </div>
 
@@ -55,7 +55,7 @@
         </table>
 
         <div class="text-sm text-gray-600 mb-6 text-left">
-            <p class="mb-1">• Maks keterlambatan <strong>10 menit</strong> dari jadwal. Lewat dari itu akan dilewati ke antrian berikutnya.</p>
+            <p class="mb-1">• Maks keterlambatan <strong>15 menit</strong> dari jadwal. Lewat dari itu akan dilewati ke antrian berikutnya.</p>
             <p class="mb-1">• Situs web ini diperbarui secara <strong>real-time</strong>. Silakan cek secara berkala.</p>
             <p>• Reschedule atau pembatalan dapat dilakukan via <strong>Wa</strong>.</p>
             <p class="text-red-500">• Diharapkan bukti booking disimpan atau di screnshoot.</p>

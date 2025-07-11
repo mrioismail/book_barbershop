@@ -2,174 +2,180 @@
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Booking Barbershop</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Booking</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#6b7280',
-                        secondary: '#facc15',
-                        accent: '#4b5563',
-                    }
-                }
-            }
-        }
-    </script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-50">
-    <div class="max-w-md mx-auto my-10 px-6 sm:px-8 md:px-10 py-6 bg-white shadow-xl rounded-2xl">
-        <div class="mb-6">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Form Booking Bills Barbershop</h2>
-            <p class="text-center text-gray-500">Cukup isi data di bawah ini dan pilih waktu yang pas. Gaya rambut keren tinggal selangkah lagi!</p>
+<body class="bg-[#141414] text-white font-sans text-xs sm:text-md md:text-base lg:text-lg">
+    <div class="max-w-3xl mx-auto py-10 px-4">
+        <h3 class="text-3xl md:text-2xl sm:text-xl font-bold text-center mb-3">
+            <!-- atur gambar biar kecil -->
+            <img src="<?= base_url('customer/images/logo.jpg'); ?>" alt="" class="w-24 mx-auto">Bills Barbershop
+        </h3>
+        <p class="text-center text-gray-400 mb-6 text-base md:text-sm sm:text-xs">
+            Selangkah lagi jadi ganteng maksimal.
+        </p>
+
+        <!-- Step Indicator -->
+        <div class="flex justify-between items-center mb-8">
+            <div class="flex items-center">
+                <div class="w-4 h-4 rounded-full bg-white"></div>
+                <span class="ml-2">Capster</span>
+            </div>
+            <div class="flex-1 h-px bg-gray-500 mx-2"></div>
+            <div class="flex items-center">
+                <div class="w-4 h-4 rounded-full bg-white"></div>
+                <span class="ml-2">Layanan</span>
+            </div>
+            <div class="flex-1 h-px bg-gray-500 mx-2"></div>
+            <div class="flex items-center">
+                <div class="w-4 h-4 rounded-full bg-white"></div>
+                <span class="ml-2">Jadwal</span>
+            </div>
+            <div class="flex-1 h-px bg-gray-500 mx-2"></div>
+            <div class="flex items-center">
+                <div class="w-4 h-4 rounded-full bg-white"></div>
+                <span class="ml-2">Data Diri</span>
+            </div>
         </div>
 
+
         <?php if (session('errors')): ?>
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            <div class="bg-red-100 text-red-700 border border-red-400 px-4 py-3 rounded mb-4">
                 <ul class="list-disc list-inside">
-                    <?php foreach (session('errors') as $err): ?>
-                        <li><?= esc($err); ?></li>
+                    <?php foreach (session('errors') as $error): ?>
+                        <li><?= esc($error) ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         <?php endif; ?>
 
-        <form id="booking-form" action="<?= base_url('booking/simpanBooking'); ?>" method="post">
-            <?= csrf_field(); ?>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block font-semibold">Nama Lengkap</label>
-                    <div class="relative">
-                        <span class="absolute left-3 top-2.5 text-gray-400"><i class="fas fa-user"></i></span>
-                        <input type="text" name="nama_customer" value="<?= old('nama_customer'); ?>" placeholder="Nama Lengkap" class="w-full pl-10 mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary <?= session('errors.nama_customer') ? 'border-red-500' : ''; ?>">
-                    </div>
-                </div>
-                <div>
-                    <label class="block font-semibold">Nomor WhatsApp</label>
-                    <div class="relative">
-                        <span class="absolute left-3 top-2.5 text-gray-400"><i class="fas fa-phone"></i></span>
-                        <input
-                            type="text"
-                            name="no_hp"
-                            value="<?= old('no_hp'); ?>"
-                            placeholder="08xxxxxxxxxx"
-                            pattern="08[0-9]{8,11}"
-                            minlength="10"
-                            maxlength="13"
-                            title="Nomor harus diawali dengan 08 dan terdiri dari 10–13 digit angka"
-                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            required
-                            class="w-full pl-10 mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary <?= session('errors.no_hp') ? 'border-red-500' : ''; ?>">
-                    </div>
-                </div>
-                <div>
-                    <label class="block font-semibold">Pilih Layanan</label>
-                    <div class="relative">
-                        <span class="absolute left-3 top-2.5 text-gray-400"><i class="fas fa-cut"></i></span>
-                        <select name="layanan_id" class="w-full pl-10 mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary <?= session('errors.layanan_id') ? 'border-red-500' : ''; ?>">
-                            <option value=""> Pilih Layanan </option>
-                            <?php foreach ($layanan as $lay): ?>
-                                <option value="<?= $lay['id']; ?>" <?= old('layanan_id') == $lay['id'] ? 'selected' : ''; ?>>
-                                    <?= $lay['nama_layanan']; ?> - Rp<?= number_format($lay['harga'], 0, ',', '.'); ?>
+        <!-- Card Form Booking -->
+        <div class="bg-[#1e1e1e] p-6 rounded-xl shadow-md">
+            <form id="booking-form" action="<?= base_url('booking/simpanBooking'); ?>" method="post">
+                <?= csrf_field(); ?>
+                <div class="space-y-5">
+
+                    <!-- Capster -->
+                    <div>
+                        <label class="block font-semibold mb-1">Pilih Capster</label>
+                        <select name="capster_id" id="capster_id" class="w-full p-2 bg-white text-black rounded">
+                            <option value="">-- Pilih Capster --</option>
+                            <?php foreach ($capster as $c): ?>
+                                <option value="<?= $c['id']; ?>" <?= old('capster_id') == $c['id'] ? 'selected' : '' ?>>
+                                    <?= esc($c['nama']); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                </div>
-                <div>
-                    <label class="block font-semibold">Pilih Capster</label>
-                    <div class="relative">
-                        <span class="absolute left-3 top-2.5 text-gray-400"><i class="fas fa-user-tie"></i></span>
-                        <select name="capster_id" id="capster_id" class="w-full pl-10 mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary <?= session('errors.capster_id') ? 'border-red-500' : ''; ?>">
-                            <option value=""> Pilih Capster </option>
-                            <?php foreach ($capster as $cap): ?>
-                                <option value="<?= $cap['id']; ?>" <?= old('capster_id') == $cap['id'] ? 'selected' : ''; ?>>
-                                    <?= $cap['nama']; ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label class="block font-semibold">Pilih Tanggal</label>
-                    <div class="relative">
-                        <span class="absolute left-3 top-2.5 text-gray-400"><i class="fas fa-calendar-alt"></i></span>
-                        <select name="tanggal" id="tanggal" class="w-full pl-10 mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary <?= session('errors.tanggal') ? 'border-red-500' : ''; ?>" <?= old('capster_id') ? '' : 'disabled'; ?>>
-                            <option value=""> Pilih Tanggal </option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label class="block font-semibold">Pilih Jam</label>
-                    <div class="relative">
-                        <span class="absolute left-3 top-2.5 text-gray-400"><i class="fas fa-clock"></i></span>
-                        <select name="jam" id="jam" class="w-full pl-10 mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary <?= session('errors.jam') ? 'border-red-500' : ''; ?>" <?= old('tanggal') ? '' : 'disabled'; ?>>
-                            <option value=""> Pilih Jam </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="md:col-span-2">
-                    <label class="block font-semibold">Catatan (opsional)</label>
-                    <div class="relative">
-                        <span class="absolute left-3 top-3 text-gray-400"><i class="fas fa-sticky-note"></i></span>
-                        <textarea name="catatan" rows="3" class="w-full pl-10 mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary <?= session('errors.catatan') ? 'border-red-500' : ''; ?>" placeholder="Tulis jika ada yang ingin disampaikan..."><?= old('catatan'); ?></textarea>
-                    </div>
-                </div>
-            </div>
 
-            <div class="text-center mt-6">
-                <button type="button" onclick="showConfirmation()" class="px-6 py-3 bg-gray-800 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transition-all duration-300 ease-in-out">Booking Sekarang</button>
-                <div class="mt-3">
-                    <a href="<?= base_url('/'); ?>" class="text-sm text-gray-500 hover:underline">← Kembali ke Halaman Utama</a>
+                    <!-- Layanan -->
+                    <div>
+                        <label class="block font-semibold mb-1">Pilih Layanan</label>
+                        <select name="layanan_id" id="layanan_id" class="w-full p-2 bg-white text-black rounded" disabled>
+                            <option value="">Pilih Capster terlebih dahulu</option>
+                        </select>
+                    </div>
+
+                    <!-- Jadwal (Tanggal & Jam) -->
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1">
+                            <label class="block font-semibold mb-1">Tanggal</label>
+                            <select name="tanggal" id="tanggal" class="w-full p-2 bg-white text-black rounded" disabled>
+                                <option value="">-- Pilih Tanggal --</option>
+                            </select>
+                        </div>
+                        <div class="flex-1">
+                            <label class="block font-semibold mb-1">Jam</label>
+                            <select name="jam" id="jam" class="w-full p-2 bg-white text-black rounded" disabled>
+                                <option value="">-- Pilih Jam --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Data Diri -->
+                    <div class="pt-2">
+                        <label class="block font-semibold mb-1">Nama Lengkap</label>
+                        <input type="text" name="nama_customer" class="w-full p-2 bg-white text-black rounded"
+                            value="<?= old('nama_customer') ?>">
+
+                        <label class="block font-semibold mt-4 mb-1">No WhatsApp</label>
+                        <input type="text" name="no_hp" class="w-full p-2 bg-white text-black rounded" value="<?= old('no_hp') ?>">
+
+                        <label class="block font-semibold mt-4 mb-1">Catatan (Opsional)</label>
+                        <textarea name="catatan" rows="3" class="w-full p-2 bg-white text-black rounded"><?= old('catatan') ?></textarea>
+                    </div>
+
+                    <!-- Garis pembatas -->
+                    <hr class="border-t border-zinc-700 mb-10" />
+
+                    <!-- Tombol Booking -->
+                    <div class="pt-4">
+                        <button type="button" onclick="openModal()"
+                            class="w-full bg-white text-black py-2 rounded font-semibold transition duration-200 hover:ring-2 hover:ring-white hover:shadow-lg">
+                            Booking Sekarang
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal Konfirmasi -->
+        <div id="confirmModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-40 flex items-center justify-center">
+            <div class="bg-white rounded-xl w-80 p-6 shadow-xl text-center animate-fade-in">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Konfirmasi Booking</h3>
+                <p class="text-gray-600 mb-5">Apakah data booking yang Anda isi sudah benar?</p>
+                <div class="flex justify-between gap-4">
+                    <button onclick="submitForm()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded font-medium">
+                        Ya, Booking
+                    </button>
+                    <button onclick="closeModal()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 rounded font-medium">
+                        Batal
+                    </button>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
 
-    <div id="modalKonfirmasi" class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class="bg-white rounded-xl p-6 max-w-md w-full shadow-lg">
-            <h3 class="text-lg font-bold mb-4 text-gray-800">Konfirmasi Booking</h3>
-            <p class="text-gray-600 mb-6">Apakah Anda yakin data yang diisi sudah benar?</p>
-            <div class="flex justify-end space-x-2">
-                <button onclick="closeConfirmation()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Periksa Kembali</button>
-                <button onclick="submitBooking()" class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">Ya, Booking Sekarang</button>
-            </div>
+        <!-- Tombol Kembali -->
+        <div class="mt-5 text-center">
+            <a href="<?= base_url('/'); ?>" class="text-sm text-gray-400 hover:underline">← Kembali ke Halaman Utama</a>
         </div>
     </div>
 
+    <!-- Script Booking -->
     <script>
-        function showConfirmation() {
-            document.getElementById('modalKonfirmasi').classList.remove('hidden');
-        }
-
-        function closeConfirmation() {
-            document.getElementById('modalKonfirmasi').classList.add('hidden');
-        }
-
-        function submitBooking() {
-            document.getElementById('booking-form').submit();
-        }
-
         const dataJadwal = <?= json_encode($data_jadwal); ?>;
+        const layananPerCapster = <?= json_encode($layanan_per_capster); ?>;
+
         const selectCapster = document.getElementById('capster_id');
+        const selectLayanan = document.getElementById('layanan_id');
         const selectTanggal = document.getElementById('tanggal');
         const selectJam = document.getElementById('jam');
 
         selectCapster.addEventListener('change', function() {
             const capsterId = this.value;
+            selectLayanan.innerHTML = '<option value="">-- Pilih Layanan --</option>';
             selectTanggal.innerHTML = '<option value="">-- Pilih Tanggal --</option>';
             selectJam.innerHTML = '<option value="">-- Pilih Jam --</option>';
+            selectLayanan.disabled = true;
             selectTanggal.disabled = true;
             selectJam.disabled = true;
 
+            if (layananPerCapster[capsterId]) {
+                layananPerCapster[capsterId].forEach(l => {
+                    const opt = document.createElement('option');
+                    opt.value = l.layanan_id;
+                    opt.textContent = `${l.nama_layanan} - Rp ${parseInt(l.harga).toLocaleString('id-ID')}`;
+                    selectLayanan.appendChild(opt);
+                });
+                selectLayanan.disabled = false;
+            }
+
             if (dataJadwal[capsterId]) {
-                const tanggalList = Object.keys(dataJadwal[capsterId]);
-                tanggalList.forEach(tgl => {
+                Object.keys(dataJadwal[capsterId]).forEach(tgl => {
                     const opt = document.createElement('option');
                     opt.value = tgl;
                     opt.textContent = formatTanggal(tgl);
@@ -182,7 +188,6 @@
         selectTanggal.addEventListener('change', function() {
             const capsterId = selectCapster.value;
             const tanggal = this.value;
-
             selectJam.innerHTML = '<option value="">-- Pilih Jam --</option>';
             selectJam.disabled = true;
 
@@ -199,12 +204,23 @@
 
         function formatTanggal(tgl) {
             const date = new Date(tgl);
-            const options = {
+            return date.toLocaleDateString('id-ID', {
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric'
-            };
-            return date.toLocaleDateString('id-ID', options);
+            });
+        }
+
+        function openModal() {
+            document.getElementById('confirmModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('confirmModal').classList.add('hidden');
+        }
+
+        function submitForm() {
+            document.getElementById('booking-form').submit();
         }
     </script>
 </body>

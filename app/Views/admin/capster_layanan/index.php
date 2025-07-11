@@ -20,10 +20,10 @@
 
         <!-- [ Main Content ] start -->
 
-        <a href="<?= base_url('admin/layanan/create') ?>"
+        <a href="<?= base_url('admin/capster_layanan/create') ?>"
             class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md badge bg-theme-bg-1 hover:bg-blue-700 text-white text-md font-medium shadow transition text-center">
             <i data-feather="plus" class="w-4 h-4"></i>
-            Tambah Layanan
+            Tambah Capster Layanan
         </a>
 
         <br>
@@ -41,20 +41,28 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Nama Capster</th>
                         <th>Nama Layanan</th>
+                        <th>Harga</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     $no = 1;
-                    foreach ($layanan as $item):
+                    foreach ($capster_layanan as $cl):
                     ?>
                         <tr>
                             <td><?= $no++; ?></td>
-                            <td><?= esc($item['nama_layanan']) ?></td>
+                            <td><?= esc($cl['nama']) ?></td>
+                            <td><?= esc($cl['nama_layanan']) ?></td>
+                            <td>Rp. <?= number_format($cl['harga'], 0, ',', '.') ?></td>
                             <td>
-                                <a href="<?= base_url('admin/layanan/detail/' . $item['id']) ?>" class="badge bg-info-800 text-white text-[12px] mx-2">Detail</a>
+                                <!-- Tombol edit dan hapus  -->
+                                <a href="<?= base_url('admin/capster_layanan/edit/' . $cl['id']) ?>" class="badge bg-warning-600 text-white text-[12px] mx-1">Edit</a>
+                                <a href="<?= base_url('admin/capster_layanan/delete/' . $cl['id']) ?>"
+                                    class="badge bg-danger-600 text-white text-[12px]"
+                                    onclick="return confirm('Yakin ingin menghapus capster layanan ini?')">Hapus</a>
                             </td>
                         </tr>
                     <?php endforeach ?>

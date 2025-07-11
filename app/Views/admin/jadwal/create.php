@@ -26,7 +26,6 @@
                 <?php endif; ?>
 
                 <form action="<?= base_url('/admin/jadwal/store') ?>" method="post">
-
                     <!-- Capster -->
                     <div class="mb-4">
                         <label class="block mb-1 text-gray-700 text-md font-medium">Capster</label>
@@ -67,7 +66,7 @@
                     <!-- Jam Manual -->
                     <div class="mb-4 manual-input">
                         <label class="block mb-1 text-gray-700 text-md font-medium">Jam</label>
-                        <input type="time" name="jam"
+                        <input type="time" name="jam" step="3600"
                             class=" w-full border border-gray-300 rounded px-3 py-2 text-md focus:outline-none focus:ring-1 focus:ring-blue-500">
 
                         <?php if (isset($pesan) && $pesan->hasError('jam')): ?>
@@ -79,7 +78,7 @@
                     <!-- Jam Range -->
                     <div class="mb-4 range-input" style="display: none;">
                         <label class="block mb-1 text-gray-700 text-md font-medium">Jam Mulai</label>
-                        <input type="time" name="jam_mulai""
+                        <input type="time" name="jam_mulai" step="3600"
                             class=" w-full border border-gray-300 rounded px-3 py-2 text-md focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <p class="text-sm text-red-500 mt-1">Input jam wajib bulat, misal 08.00, 09.00, 10.00 dst.</p>
 
@@ -90,7 +89,7 @@
 
                     <div class="mb-4 range-input" style="display: none;">
                         <label class="block mb-1 text-gray-700 text-md font-medium">Jam Selesai</label>
-                        <input type="time" name="jam_selesai"
+                        <input type="time" name="jam_selesai" step="3600"
                             class="w-full border border-gray-300 rounded px-3 py-2 text-md focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <p class="text-sm text-red-500 mt-1">Input jam wajib bulat, misal 08.00, 09.00, 10.00 dst.</p>
 

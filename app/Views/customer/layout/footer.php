@@ -1,5 +1,5 @@
 <footer class="footer-section py-5 mt-5 bg-dark text-white">
-    <div class="container">
+    <div class="container px-4 px-lg-5">
         <div class="row gy-4">
 
             <!-- Brand / Tentang -->
@@ -42,7 +42,7 @@
         <hr class="my-4 border-secondary">
 
         <div class="text-center small text-secondary">
-            &copy; <?= date('Y') ?> Bills Barbershop - Desain awal oleh TemplateMo, dikembangkan ulang oleh <span class="rionel">Rionel.</span>
+            &copy; <?= date('Y') ?> Bills Barbershop - Dikembangkan oleh <span class="rionel">Rionel.</span>
         </div>
     </div>
 </footer>

@@ -23,7 +23,7 @@
     </div>
 </section>
 
-<!-- Story -->
+<!-- Story dan Capster-->
 <section class="about-section section-padding" id="section_2">
     <div class="container">
         <div class="row">
@@ -33,90 +33,46 @@
                     <p>Di Bills Barbershop, kami percaya bahwa potongan rambut bukan cuma soal gaya—tapi tentang rasa percaya diri. Berawal dari semangat untuk menghadirkan pelayanan barbershop yang nyaman, rapi, dan profesional, kami hadir untuk bantu kamu tampil maksimal setiap hari. Dikerjakan oleh barber berpengalaman, dengan suasana yang santai dan bersih, kamu tinggal duduk, santai, dan siap jadi ganteng!</p>
                 </div>
             </div>
-            <h6 class="mb-5">Tim Bills Barbershop</h6>
-            <div class="col-lg-5 col-12 custom-block-bg-overlay-wrap me-lg-5 mb-5 mb-lg-0">
-                <img src="<?php echo base_url('customer/images/barber/portrait-male-hairdresser-with-scissors.jpg') ?>" class="custom-block-bg-overlay-image img-fluid" alt="">
-                <div class="team-info d-flex align-items-center flex-wrap">
-                    <p class="mb-0">Bily</p>
-                    <ul class="social-icon ms-auto">
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-facebook">
-                            </a>
-                        </li>
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-instagram">
-                            </a>
-                        </li>
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-whatsapp">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-5 col-12 custom-block-bg-overlay-wrap mt-4 mt-lg-0 mb-5 mb-lg-0">
-                <img src="<?php echo base_url('customer/images/barber/portrait-mid-adult-bearded-male-barber-with-folded-arms.jpg') ?>" class="custom-block-bg-overlay-image img-fluid" alt="">
-                <div class="team-info d-flex align-items-center flex-wrap">
-                    <p class="mb-0">Fadli</p>
-                    <ul class="social-icon ms-auto">
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-facebook">
-                            </a>
-                        </li>
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-instagram">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            <h6 class="text-center mb-4">Tim Bills Barbershop</h6>
+            <div class="row g-4">
+                <?php foreach ($capster as $c) : ?>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="card h-100 shadow-sm border-0 rounded-4 bg-dark text-white">
+                            <img src="<?php echo base_url('customer/images/barber/portrait-male-hairdresser-with-scissors.jpg') ?>" alt="Capster" class="w-full h-40 md:h-48 lg:h-56 object-cover">
+                            <div class="card-body">
+                                <p class="card-text fw-semibold"><?= $c['nama']; ?></p>
+                            </div>
+
+                            <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2 pb-3 px-3">
+                                <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="text-white"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Service (Gaya Rambut) -->
+<!-- Layanan  -->
 <section class="services-section section-padding" id="section_3">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-12">
                 <h2 class="mb-5">Layanan</h2>
             </div>
-            <div class="col-lg-6 col-12 mb-4">
-                <div class="services-thumb">
-                    <img src="<?php echo base_url('customer/images/services/woman-cutting-hair-man-salon.jpg') ?>" class="services-image img-fluid" alt="">
-                    <div class="services-info d-flex align-items-end">
-                        <h4 class="mb-0">Hair cut</h4>
-                        <strong class="services-thumb-price">$36.00</strong>
+            <?php foreach ($layanan as $l) : ?>
+                <div class="col-lg-6 col-12 mb-4">
+                    <div class="services-thumb">
+                        <img src="<?php echo base_url('customer/images/services/woman-cutting-hair-man-salon.jpg') ?>" class="services-image img-fluid" alt="">
+                        <div class="services-info d-flex align-items-end">
+                            <h4 class="mb-0"><?= $l['nama_layanan']; ?></h4>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 col-12 mb-4">
-                <div class="services-thumb">
-                    <img src="<?php echo base_url('customer/images/services/hairdresser-grooming-their-client.jpg') ?>" class="services-image img-fluid" alt="">
-                    <div class="services-info d-flex align-items-end">
-                        <h4 class="mb-0">Washing</h4>
-                        <strong class="services-thumb-price">$25.00</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-12 mb-4 mb-lg-0">
-                <div class="services-thumb">
-                    <img src="<?php echo base_url('customer/images/services/hairdresser-grooming-client.jpg') ?>" class="services-image img-fluid" alt="">
-                    <div class="services-info d-flex align-items-end">
-                        <h4 class="mb-0">Shaves</h4>
-                        <strong class="services-thumb-price">$30.00</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-12">
-                <div class="services-thumb">
-                    <img src="<?php echo base_url('customer/images/services/boy-getting-haircut-salon-front-view.jpg') ?>" class="services-image img-fluid" alt="">
-                    <div class="services-info d-flex align-items-end">
-                        <h4 class="mb-0">Kids</h4>
-                        <strong class="services-thumb-price">$25.00</strong>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -129,7 +85,7 @@
                 <div class="price-list-thumb-wrap">
                     <div class="mb-4">
                         <h2 class="mb-2">Daftar Harga</h2>
-                        <strong class="text-muted">Dimulai dari harga 25K</strong><br><br>
+                        <strong class="text-muted">Harga sesuai dari pilihan Capster</strong><br><br>
 
                         <!-- catatan : $index ini menentukan key dari nama layanan yg di mulai key nya dari 0 -->
                         <?php foreach ($layanan as $index => $lay): ?>
@@ -144,7 +100,6 @@
                                             data-index="<?= $index ?>">
                                             Detail
                                         </span>
-                                        <strong class="text-danger"><?= number_format($lay['harga'], 0, ',', '.') ?></strong>
                                     </div>
                                 </div>
                                 <div class="detail-layanan mt-2 text-muted small" id="detail-<?= $index ?>" style="display: none;">

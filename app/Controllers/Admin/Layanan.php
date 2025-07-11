@@ -49,7 +49,6 @@ class Layanan extends BaseController
     {
         $foto_layanan = $this->request->getFile('foto_layanan');
         $nama_layanan = $this->request->getPost('nama_layanan');
-        $harga = $this->request->getPost('harga');
         $detail_layanan = $this->request->getPost('detail_layanan');
 
         $aturan = [
@@ -70,14 +69,6 @@ class Layanan extends BaseController
                     'required'   => 'Nama layanan wajib diisi.',
                     'min_length' => 'Nama layanan minimal terdiri dari 3 karakter.',
                     'max_length' => 'Nama layanan maksimal terdiri dari 100 karakter.'
-                ]
-            ],
-            'harga' => [
-                'label' => 'Harga',
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'Harga wajib diisi.',
-                    'numeric'  => 'Harga harus berupa angka.'
                 ]
             ],
             'detail_layanan' => [
@@ -115,7 +106,6 @@ class Layanan extends BaseController
             $data = [
                 'foto_layanan'    => $nama_foto,
                 'nama_layanan'    => $nama_layanan,
-                'harga'           => $harga,
                 'detail_layanan'  => $detail_layanan
             ];
             $this->layananModel->insert($data);
@@ -149,7 +139,6 @@ class Layanan extends BaseController
         $foto_layanan_lama = $this->request->getPost('foto_layanan_lama');
         $foto_layanan = $this->request->getFile('foto_layanan');
         $nama_layanan = $this->request->getPost('nama_layanan');
-        $harga = $this->request->getPost('harga');
         $detail_layanan = $this->request->getPost('detail_layanan');
 
         $aturan = [
@@ -169,14 +158,6 @@ class Layanan extends BaseController
                     'required' => 'Nama layanan harus diisi.',
                     'min_length' => 'Nama layanan minimal 3 karakter.',
                     'max_length' => 'Nama layanan maksimal 100 karakter.',
-                ]
-            ],
-            'harga' => [
-                'label' => 'Harga',
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'Harga harus diisi.',
-                    'numeric' => 'Harga harus berupa angka.',
                 ]
             ],
             'detail_layanan' => [
@@ -210,7 +191,6 @@ class Layanan extends BaseController
         // jika validasi berhasil
         $data = [
             'nama_layanan'    => $nama_layanan,
-            'harga'           => $harga,
             'detail_layanan'  => $detail_layanan
         ];
         // jika ada foto layanan yang diunggah

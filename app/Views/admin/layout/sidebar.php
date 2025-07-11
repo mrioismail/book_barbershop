@@ -1,8 +1,8 @@
 <nav class="pc-sidebar">
     <div class="navbar-wrapper">
         <div class="m-header px-4">
-            <a href="<?= base_url('admin/home') ?>" class="d-flex align-items-center">
-                <img src="<?= base_url('admin/assets/images/logo.jpg') ?>" alt="logo" style="height: 200px;" />
+            <a href="<?= base_url('admin/home') ?>" class="">
+                <img src="<?= base_url('admin/assets/images/logo.jpg') ?>" alt="logo" style="height: 100px;" />
             </a>
         </div>
 
@@ -28,13 +28,21 @@
                 <li class="pc-item">
                     <a href="<?= base_url('admin/layanan') ?>" class="pc-link">
                         <span class="pc-micon"><i data-feather="scissors"></i></span>
-                        <span class="pc-mtext">Layanan</span>
+                        <span class="pc-mtext">Data Layanan</span>
                     </a>
                 </li>
                 <li class="pc-item">
                     <a href="<?= base_url('admin/capster') ?>" class="pc-link">
                         <span class="pc-micon"><i data-feather="users"></i></span>
-                        <span class="pc-mtext">Capster</span>
+                        <span class="pc-mtext">Data Capster</span>
+                    </a>
+                </li>
+                <li class="pc-item">
+                    <a href="<?= base_url('admin/capster_layanan') ?>" class="pc-link">
+                        <span class="pc-micon">
+                            <i data-feather="user"></i>
+                        </span>
+                        <span class="pc-mtext">Harga Capster</span>
                     </a>
                 </li>
                 <li class="pc-item">
@@ -43,6 +51,7 @@
                         <span class="pc-mtext">Jadwal</span>
                     </a>
                 </li>
+
 
                 <!-- Menu Laporan -->
                 <li class="pc-item pc-caption">
@@ -56,6 +65,7 @@
                 </li>
             </ul>
         </div>
+
 
     </div>
 </nav>

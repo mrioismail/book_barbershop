@@ -25,7 +25,7 @@ class Jadwal extends BaseController
 
         $data = [
             'title' => 'Jadwal',
-            'jadwal' => $this->JadwalModel->getWithCapster(),
+            'jadwal' => $this->JadwalModel->getWithCapster(), // dari model JadwalModel
 
         ];
         return view('admin/jadwal/index', $data);
@@ -113,6 +113,7 @@ class Jadwal extends BaseController
             // Cek jam bulat
             if (date('i', strtotime($jam)) != '00') {
                 return redirect()->back()->withInput()->with('pesan', 'Jam harus bulat tanpa menit (contoh: 08:00).');
+                exit;
             }
 
             // Cek apakah jadwal sudah ada & statusnya penuh
