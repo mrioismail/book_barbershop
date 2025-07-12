@@ -112,8 +112,7 @@ class Jadwal extends BaseController
 
             // Cek jam bulat
             if (date('i', strtotime($jam)) != '00') {
-                return redirect()->back()->withInput()->with('pesan', 'Jam harus bulat tanpa menit (contoh: 08:00).');
-                exit;
+                return redirect()->to(base_url('admin/jadwal/create'))->withInput()->with('pesan', 'Jam harus bulat...');
             }
 
             // Cek apakah jadwal sudah ada & statusnya penuh
@@ -124,7 +123,7 @@ class Jadwal extends BaseController
                 ->first();
 
             if ($cek) {
-                return redirect()->back()->withInput()->with('pesan', 'jadwal ini sudah terdaftar, Pilih jadwal lain.');
+                return redirect()->to(base_url('admin/jadwal/create'))->withInput()->with('pesan', 'Jadwal sudah ada, pilih jadwal lain.');
             }
 
             $this->JadwalModel->save([
@@ -138,11 +137,11 @@ class Jadwal extends BaseController
             $jamSelesai = strtotime($this->request->getPost('jam_selesai'));
 
             if (date('i', $jamMulai) != '00' || date('i', $jamSelesai) != '00') {
-                return redirect()->back()->withInput()->with('pesan', 'Jam mulai dan jam selesai harus jam bulat.');
+                return redirect()->to(base_url('admin/jadwal/create'))->with('pesan', 'Gagal! Jam mulai dan jam selesai harus jam bulat.');
             }
 
             if ($jamMulai >= $jamSelesai) {
-                return redirect()->back()->withInput()->with('pesan', 'Jam selesai harus lebih besar dari jam mulai.');
+                return redirect()->to(base_url('admin/jadwal/create'))->withInput()->with('pesan', 'Gagal! Jam selesai harus lebih besar dari jam mulai.');
             }
 
             // Cek setiap jam dalam rentang
@@ -157,7 +156,7 @@ class Jadwal extends BaseController
                     ->first();
 
                 if ($cek) {
-                    return redirect()->back()->withInput()->with('pesan', 'Jam ' . $jamFormatted . ' sudah penuh. Tidak bisa menambahkan.');
+                    return redirect()->to(base_url('admin/jadwal/create'))->withInput()->with('pesan', 'Jam ' . $jamFormatted . ' sudah penuh. Tidak bisa menambahkan.');
                 }
 
                 $this->JadwalModel->save([
@@ -229,14 +228,19 @@ class Jadwal extends BaseController
         } else {
             // sebelum update data, cek apakah jam sudah bulat
             if (date('i', strtotime($jam)) != '00') {
-                return redirect()->back()->withInput()->with('pesan', 'Jam harus bulat tanpa menit (contoh: 08:00).');
+                return redirect()->to(base_url('admin/jadwal/edit/' . $id))->withInput()->with('pesan', 'Jam harus bulat tanpa menit (contoh: 08:00).');
             }
 
-            // cek jika ada data jadwal di tabel booking maka tidak bisa diupdate
-            $cekBooking = $this->bookingModel->findAll();
+            // Cek apakah jadwal sudah dipakai untuk booking
+            $jadwal = $this->JadwalModel->find($id);
+            $cekBooking = $this->bookingModel
+                ->where('capster_id', $jadwal['capster_id'])
+                ->where('tanggal', $jadwal['tanggal'])
+                ->where('jam', $jadwal['jam'])
+                ->first();
+
             if ($cekBooking) {
-                session()->setFlashdata('pesan', 'Jadwal tidak dapat diupdate karena sudah ada booking.');
-                return redirect()->to('/admin/jadwal');
+                return redirect()->to(base_url('admin/jadwal/edit/' . $id))->withInput()->with('pesan', 'Jadwal ini sudah dibooking, tidak bisa diupdate.');
             }
 
             // Cek apakah jadwal sudah ada & statusnya penuh
@@ -247,7 +251,7 @@ class Jadwal extends BaseController
                 ->where('id !=', $id) // abaikan data yang sedang diupdate
                 ->first();
             if ($cek) {
-                return redirect()->back()->withInput()->with('pesan', 'Jadwal ini sudah terdaftar, Pilih jadwal lain.');
+                return redirect()->to(base_url('admin/jadwal/edit/' . $id))->withInput()->with('pesan', 'Jadwal ini sudah terdaftar, Pilih jadwal lain.');
             }
 
             // Validasi berhasil, lanjutkan update data

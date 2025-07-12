@@ -85,7 +85,8 @@
                 <div class="price-list-thumb-wrap">
                     <div class="mb-4">
                         <h2 class="mb-2">Daftar Harga</h2>
-                        <strong class="text-muted">Harga sesuai dari pilihan Capster</strong><br><br>
+                        <strong class="text-muted">Harga layanan dapat berbeda tergantung capster pilihan Anda.
+                            Daftar di bawah ini adalah harga umum sebagai referensi awal.</strong><br><br>
 
                         <!-- catatan : $index ini menentukan key dari nama layanan yg di mulai key nya dari 0 -->
                         <?php foreach ($layanan as $index => $lay): ?>
@@ -93,6 +94,7 @@
                                 <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
                                     <span class="fw-semibold"><?= esc($lay['nama_layanan']) ?></span>
                                     <div class="mt-2 mt-sm-0 d-flex align-items-center gap-2">
+                                        <span class="fw-semibold"> Rp <?= number_format($lay['harga_layanan'], 0, ',', '.') ?></span>
                                         <span
                                             class="toggle-detail-btn text-decoration-underline text-muted small"
                                             role="button"

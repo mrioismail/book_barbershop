@@ -16,33 +16,10 @@
             <img src="<?= base_url('customer/images/logo.jpg'); ?>" alt="" class="w-24 mx-auto">Bills Barbershop
         </h3>
         <p class="text-center text-gray-400 mb-6 text-base md:text-sm sm:text-xs">
-            Selangkah lagi jadi ganteng maksimal.
+            Selangkah lagi untuk tampil lebih percaya diri — yuk mulai proses bookingmu sekarang!
         </p>
 
-        <!-- Step Indicator -->
-        <div class="flex justify-between items-center mb-8">
-            <div class="flex items-center">
-                <div class="w-4 h-4 rounded-full bg-white"></div>
-                <span class="ml-2">Capster</span>
-            </div>
-            <div class="flex-1 h-px bg-gray-500 mx-2"></div>
-            <div class="flex items-center">
-                <div class="w-4 h-4 rounded-full bg-white"></div>
-                <span class="ml-2">Layanan</span>
-            </div>
-            <div class="flex-1 h-px bg-gray-500 mx-2"></div>
-            <div class="flex items-center">
-                <div class="w-4 h-4 rounded-full bg-white"></div>
-                <span class="ml-2">Jadwal</span>
-            </div>
-            <div class="flex-1 h-px bg-gray-500 mx-2"></div>
-            <div class="flex items-center">
-                <div class="w-4 h-4 rounded-full bg-white"></div>
-                <span class="ml-2">Data Diri</span>
-            </div>
-        </div>
-
-
+        <!-- Notifikasi Error -->
         <?php if (session('errors')): ?>
             <div class="bg-red-100 text-red-700 border border-red-400 px-4 py-3 rounded mb-4">
                 <ul class="list-disc list-inside">
@@ -57,63 +34,89 @@
         <div class="bg-[#1e1e1e] p-6 rounded-xl shadow-md">
             <form id="booking-form" action="<?= base_url('booking/simpanBooking'); ?>" method="post">
                 <?= csrf_field(); ?>
-                <div class="space-y-5">
+                <div class="space-y-10">
 
-                    <!-- Capster -->
-                    <div>
-                        <label class="block font-semibold mb-1">Pilih Capster</label>
-                        <select name="capster_id" id="capster_id" class="w-full p-2 bg-white text-black rounded">
-                            <option value="">-- Pilih Capster --</option>
-                            <?php foreach ($capster as $c): ?>
-                                <option value="<?= $c['id']; ?>" <?= old('capster_id') == $c['id'] ? 'selected' : '' ?>>
-                                    <?= esc($c['nama']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                    <!-- Layanan -->
-                    <div>
-                        <label class="block font-semibold mb-1">Pilih Layanan</label>
-                        <select name="layanan_id" id="layanan_id" class="w-full p-2 bg-white text-black rounded" disabled>
-                            <option value="">Pilih Capster terlebih dahulu</option>
-                        </select>
-                    </div>
-
-                    <!-- Jadwal (Tanggal & Jam) -->
-                    <div class="flex flex-col md:flex-row gap-4">
-                        <div class="flex-1">
-                            <label class="block font-semibold mb-1">Tanggal</label>
-                            <select name="tanggal" id="tanggal" class="w-full p-2 bg-white text-black rounded" disabled>
-                                <option value="">-- Pilih Tanggal --</option>
+                    <!-- STEP 1: Capster -->
+                    <div class="relative">
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-black font-bold text-sm z-10">1</div>
+                            <h2 class="ml-3 text-xl font-semibold text-white">Pilih Capster</h2>
+                        </div>
+                        <p class="ml-9 text-gray-400 mb-4">Pilih capster favorit kamu.</p>
+                        <div class="ml-9">
+                            <select name="capster_id" id="capster_id" class="w-full p-2 bg-white text-black rounded">
+                                <option value="">-- Pilih Capster --</option>
+                                <?php foreach ($capster as $c): ?>
+                                    <option value="<?= $c['id']; ?>" <?= old('capster_id') == $c['id'] ? 'selected' : '' ?>>
+                                        <?= esc($c['nama']); ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="flex-1">
-                            <label class="block font-semibold mb-1">Jam</label>
-                            <select name="jam" id="jam" class="w-full p-2 bg-white text-black rounded" disabled>
-                                <option value="">-- Pilih Jam --</option>
+                        <div class="absolute top-7 left-2.5 w-px h-[calc(100%-1.75rem)] bg-gray-600"></div>
+                    </div>
+
+                    <!-- STEP 2: Layanan -->
+                    <div class="relative">
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-black font-bold text-sm z-10">2</div>
+                            <h2 class="ml-3 text-xl font-semibold text-white">Pilih Layanan</h2>
+                        </div>
+                        <p class="ml-9 text-gray-400 mb-4">Layanan hanya muncul jika capster sudah dipilih.</p>
+                        <div class="ml-9">
+                            <select name="layanan_id" id="layanan_id" class="w-full p-2 bg-white text-black rounded" disabled>
+                                <option value="">Pilih Capster terlebih dahulu</option>
                             </select>
                         </div>
+                        <div class="absolute top-7 left-2.5 w-px h-[calc(100%-1.75rem)] bg-gray-600"></div>
                     </div>
 
-                    <!-- Data Diri -->
-                    <div class="pt-2">
-                        <label class="block font-semibold mb-1">Nama Lengkap</label>
-                        <input type="text" name="nama_customer" class="w-full p-2 bg-white text-black rounded"
-                            value="<?= old('nama_customer') ?>">
-
-                        <label class="block font-semibold mt-4 mb-1">No WhatsApp</label>
-                        <input type="text" name="no_hp" class="w-full p-2 bg-white text-black rounded" value="<?= old('no_hp') ?>">
-
-                        <label class="block font-semibold mt-4 mb-1">Catatan (Opsional)</label>
-                        <textarea name="catatan" rows="3" class="w-full p-2 bg-white text-black rounded"><?= old('catatan') ?></textarea>
+                    <!-- STEP 3: Jadwal -->
+                    <div class="relative">
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-black font-bold text-sm z-10">3</div>
+                            <h2 class="ml-3 text-xl font-semibold text-white">Pilih Jadwal</h2>
+                        </div>
+                        <p class="ml-9 text-gray-400 mb-4">Pilih tanggal dan jam untuk menentukan jadwal kamu.</p>
+                        <div class="ml-9 flex flex-col md:flex-row gap-4">
+                            <div class="flex-1">
+                                <select name="tanggal" id="tanggal" class="w-full p-2 bg-white text-black rounded" disabled>
+                                    <option value="">-- Pilih Tanggal --</option>
+                                </select>
+                            </div>
+                            <div class="flex-1">
+                                <select name="jam" id="jam" class="w-full p-2 bg-white text-black rounded" disabled>
+                                    <option value="">-- Pilih Jam --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="absolute top-7 left-2.5 w-px h-[calc(100%-1.75rem)] bg-gray-600"></div>
                     </div>
 
-                    <!-- Garis pembatas -->
-                    <hr class="border-t border-zinc-700 mb-10" />
+                    <!-- STEP 4: Data Diri -->
+                    <div class="relative">
+                        <div class="flex items-center mb-4">
+                            <div class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-black font-bold text-sm z-10">4</div>
+                            <h2 class="ml-3 text-xl font-semibold text-white">Data Diri</h2>
+                        </div>
+                        <p class="ml-9 text-gray-400 mb-4">Isi data diri dengan benar.</p>
+                        <div class="ml-9">
+                            <label class="block font-semibold mb-1">Nama Lengkap</label>
+                            <input type="text" name="nama_customer" class="w-full p-2 bg-white text-black rounded"
+                                value="<?= old('nama_customer') ?>">
+
+                            <label class="block font-semibold mt-4 mb-1">No WhatsApp</label>
+                            <input type="text" name="no_hp" class="w-full p-2 bg-white text-black rounded"
+                                value="<?= old('no_hp') ?>">
+
+                            <label class="block font-semibold mt-4 mb-1">Catatan (Opsional)</label>
+                            <textarea name="catatan" rows="3" class="w-full p-2 bg-white text-black rounded"><?= old('catatan') ?></textarea>
+                        </div>
+                        <div class="absolute top-7 left-2.5 w-px h-[calc(100%-1.75rem)] bg-gray-600"></div>
+                    </div>
 
                     <!-- Tombol Booking -->
-                    <div class="pt-4">
+                    <div class="ml-9 pt-4">
                         <button type="button" onclick="openModal()"
                             class="w-full bg-white text-black py-2 rounded font-semibold transition duration-200 hover:ring-2 hover:ring-white hover:shadow-lg">
                             Booking Sekarang
@@ -121,6 +124,7 @@
                     </div>
                 </div>
             </form>
+
         </div>
 
         <!-- Modal Konfirmasi -->
@@ -148,6 +152,7 @@
     <!-- Script Booking -->
     <script>
         const dataJadwal = <?= json_encode($data_jadwal); ?>;
+        const layananUmum = <?= json_encode($layanan); ?>;
         const layananPerCapster = <?= json_encode($layanan_per_capster); ?>;
 
         const selectCapster = document.getElementById('capster_id');
@@ -165,10 +170,20 @@
             selectJam.disabled = true;
 
             if (layananPerCapster[capsterId]) {
+                // Jika capster punya layanan spesifik
                 layananPerCapster[capsterId].forEach(l => {
                     const opt = document.createElement('option');
                     opt.value = l.layanan_id;
                     opt.textContent = `${l.nama_layanan} - Rp ${parseInt(l.harga).toLocaleString('id-ID')}`;
+                    selectLayanan.appendChild(opt);
+                });
+                selectLayanan.disabled = false;
+            } else {
+                // ⛳ fallback ke layanan umum
+                layananUmum.forEach(l => {
+                    const opt = document.createElement('option');
+                    opt.value = l.id;
+                    opt.textContent = `${l.nama_layanan} - Rp ${parseInt(l.harga_layanan).toLocaleString('id-ID')} (Umum)`;
                     selectLayanan.appendChild(opt);
                 });
                 selectLayanan.disabled = false;

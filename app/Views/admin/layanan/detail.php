@@ -44,6 +44,12 @@
                             Nama Layanan:
                             <strong class="text-dark d-block"><?= esc($layanan['nama_layanan']) ?></strong>
                         </li>
+                        <li class="mb-3">
+                            Harga Layanan:
+                            <strong class="text-dark d-block">
+                                Rp <?= number_format($layanan['harga_layanan'], 0, ',', '.') ?>
+                            </strong>
+                        </li>
                         <li>
                             Detail Layanan:
                             <strong class="text-dark d-block"><?= esc($layanan['detail_layanan']) ?></strong>

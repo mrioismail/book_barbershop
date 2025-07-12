@@ -54,6 +54,17 @@
                         <?php endif; ?>
                     </div>
 
+                    <!-- Harga Layanan -->
+                    <div class="mb-4">
+                        <label class="block text-md font-medium text-gray-700 mb-1">Harga Layanan</label>
+                        <input type="text" name="harga_layanan" value="<?= esc($layanan['harga_layanan']) ?>" required
+                            class="w-full border border-gray-300 rounded px-3 py-2 text-md focus:outline-none focus:ring-1 focus:ring-blue-500">
+
+                        <?php if (isset($pesan) && $pesan->hasError('harga_layanan')): ?>
+                            <p class="text-md text-red-500 mt-1"><?= $pesan->getError('harga_layanan') ?></p>
+                        <?php endif; ?>
+                    </div>
+
                     <!-- Detail Layanan -->
                     <div class="mb-4">
                         <label class="block text-md font-medium text-gray-700 mb-1">Detail Layanan</label>

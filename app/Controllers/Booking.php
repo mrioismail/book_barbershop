@@ -32,28 +32,13 @@ class Booking extends BaseController
         return view('customer/index', $data);
     }
 
-    public function getLayananByCapster($capster_id)
-    {
-        $capsterLayananModel = new CapsterLayananModel();
-        $layanan = $capsterLayananModel->getByCapster($capster_id);
-
-        // Jika kamu mau menampilkan view HTML:
-        return view('customer/booking/form_booking', ['layanan' => $layanan]);
-
-        // Kalau hanya untuk AJAX (misalnya fetch dengan JS):
-        // return $this->response->setJSON($layanan);
-    }
-
     public function booking()
     {
         $layanan = $this->layananModel->findAll();
         $capster = $this->capsterModel->findAll();
 
-        // Ambil semua data capster_layanan (join ke layanan untuk ambil nama & harga)
-        $capsterLayananRaw = $this->capsterLayananModel
-            ->select('capster_layanan.capster_id, layanan.id as layanan_id, layanan.nama_layanan, capster_layanan.harga')
-            ->join('layanan', 'layanan.id = capster_layanan.layanan_id')
-            ->findAll();
+        // Ambil semua data capster_layanan (join ke layanan untuk ambil nama & harga) 
+        $capsterLayananRaw = $this->capsterLayananModel->getCapsterLayanan(); // dari model CapsterLayananModel
 
         // Susun data per capster → layanan
         $layanan_per_capster = [];
@@ -79,7 +64,7 @@ class Booking extends BaseController
         }
 
         $data = [
-            'layanan' => $layanan, // masih bisa dipakai untuk validasi form
+            'layanan' => $layanan,
             'capster' => $capster,
             'layanan_per_capster' => $layanan_per_capster,
             'data_jadwal' => $data_jadwal
