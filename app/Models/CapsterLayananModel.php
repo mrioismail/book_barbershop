@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class CapsterLayananModel extends Model
 {
     protected $table = 'capster_layanan';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_capster_layanan';
     protected $allowedFields = ['capster_id', 'layanan_id', 'harga'];
 
     public function getCapsterLayanan()

@@ -141,13 +141,13 @@ class Capster extends BaseController
         $pengalaman = $this->request->getPost('pengalaman');
 
         // Cek jika capster sudah dipakai di booking
-        $cek_capster = $this->bookingModel
-            ->where('capster_id', $id)
-            ->first();
-        if ($cek_capster) {
-            session()->setFlashdata('pesan', 'Gagal Edit! Capster sudah digunakan di data booking.');
-            return redirect()->to('admin/capster/edit/' . $id)->withInput();
-        }
+        // $cek_capster = $this->bookingModel
+        //     ->where('capster_id', $id)
+        //     ->first();
+        // if ($cek_capster) {
+        //     session()->setFlashdata('pesan', 'Gagal Edit! Capster sudah digunakan di data booking.');
+        //     return redirect()->to('admin/capster/edit/' . $id)->withInput();
+        // }
 
         // Cek jika nama capster sudah dipakai oleh capster lain
         $cek_nama_capster = $this->capsterModel
@@ -158,7 +158,6 @@ class Capster extends BaseController
             session()->setFlashdata('pesan', 'Gagal Edit! Nama capster sudah digunakan oleh capster lain.');
             return redirect()->to('admin/capster/edit/' . $id)->withInput();
         }
-
 
         $aturan = [
             'foto_capster' => [

@@ -192,13 +192,13 @@ class Layanan extends BaseController
         }
 
         // cek layanan yg ada di tabel booking
-        $cek_layanan = $this->bookingModel
-            ->where('layanan_id', $id)
-            ->first();
-        if ($cek_layanan) {
-            session()->setFlashdata('pesan', 'Gagal Edit! Nama layanan sudah di booking.');
-            return redirect()->to('admin/layanan/edit/' . $id)->withInput();
-        }
+        // $cek_layanan = $this->bookingModel
+        //     ->where('layanan_id', $id)
+        //     ->first();
+        // if ($cek_layanan) {
+        //     session()->setFlashdata('pesan', 'Gagal Edit! Nama layanan sudah di booking.');
+        //     return redirect()->to('admin/layanan/edit/' . $id)->withInput();
+        // }
 
         // jika validasi berhasil
         $data = [

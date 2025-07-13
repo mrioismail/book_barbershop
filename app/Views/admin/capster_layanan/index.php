@@ -59,8 +59,8 @@
                             <td>Rp. <?= number_format($cl['harga'], 0, ',', '.') ?></td>
                             <td>
                                 <!-- Tombol edit dan hapus  -->
-                                <a href="<?= base_url('admin/capster_layanan/edit/' . $cl['id']) ?>" class="badge bg-warning-600 text-white text-[12px] mx-1">Edit</a>
-                                <a href="<?= base_url('admin/capster_layanan/delete/' . $cl['id']) ?>"
+                                <a href="<?= base_url('admin/capster_layanan/edit/' . $cl['id_capster_layanan']) ?>" class="badge bg-warning-600 text-white text-[12px] mx-1">Edit</a>
+                                <a href="<?= base_url('admin/capster_layanan/delete/' . $cl['id_capster_layanan']) ?>"
                                     class="badge bg-danger-600 text-white text-[12px]"
                                     onclick="return confirm('Yakin ingin menghapus capster layanan ini?')">Hapus</a>
                             </td>

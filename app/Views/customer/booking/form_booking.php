@@ -42,7 +42,7 @@
                             <div class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-black font-bold text-sm z-10">1</div>
                             <h2 class="ml-3 text-xl font-semibold text-white">Pilih Capster</h2>
                         </div>
-                        <p class="ml-9 text-gray-400 mb-4">Pilih capster favorit kamu.</p>
+                        <p class="ml-9 text-gray-400 mb-4">Pilih capster andalanmu. Siapa yang paling cocok buat gaya kamu hari ini?</p>
                         <div class="ml-9">
                             <select name="capster_id" id="capster_id" class="w-full p-2 bg-white text-black rounded">
                                 <option value="">-- Pilih Capster --</option>
@@ -62,7 +62,7 @@
                             <div class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-black font-bold text-sm z-10">2</div>
                             <h2 class="ml-3 text-xl font-semibold text-white">Pilih Layanan</h2>
                         </div>
-                        <p class="ml-9 text-gray-400 mb-4">Layanan hanya muncul jika capster sudah dipilih.</p>
+                        <p class="ml-9 text-gray-400 mb-4">Pilih jenis layanan sesuai kebutuhan kamu. Tapi sebelumnya, pilih capsternya dulu ya!</p>
                         <div class="ml-9">
                             <select name="layanan_id" id="layanan_id" class="w-full p-2 bg-white text-black rounded" disabled>
                                 <option value="">Pilih Capster terlebih dahulu</option>
@@ -77,7 +77,7 @@
                             <div class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-black font-bold text-sm z-10">3</div>
                             <h2 class="ml-3 text-xl font-semibold text-white">Pilih Jadwal</h2>
                         </div>
-                        <p class="ml-9 text-gray-400 mb-4">Pilih tanggal dan jam untuk menentukan jadwal kamu.</p>
+                        <p class="ml-9 text-gray-400 mb-4">Atur waktu terbaikmu! Pilih tanggal dan jam yang sesuai.</p>
                         <div class="ml-9 flex flex-col md:flex-row gap-4">
                             <div class="flex-1">
                                 <select name="tanggal" id="tanggal" class="w-full p-2 bg-white text-black rounded" disabled>
@@ -99,7 +99,7 @@
                             <div class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-black font-bold text-sm z-10">4</div>
                             <h2 class="ml-3 text-xl font-semibold text-white">Data Diri</h2>
                         </div>
-                        <p class="ml-9 text-gray-400 mb-4">Isi data diri dengan benar.</p>
+                        <p class="ml-9 text-gray-400 mb-4">Masukkan data dirimu dengan benar supaya kami bisa konfirmasi.</p>
                         <div class="ml-9">
                             <label class="block font-semibold mb-1">Nama Lengkap</label>
                             <input type="text" name="nama_customer" class="w-full p-2 bg-white text-black rounded"
@@ -121,6 +121,10 @@
                             class="w-full bg-white text-black py-2 rounded font-semibold transition duration-200 hover:ring-2 hover:ring-white hover:shadow-lg">
                             Booking Sekarang
                         </button>
+                        <!-- Tombol Kembali -->
+                        <div class="mt-5 text-center">
+                            <a href="<?= base_url('/'); ?>" class="text-sm text-gray-400 hover:underline">← Kembali ke Halaman Utama</a>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -143,9 +147,8 @@
             </div>
         </div>
 
-        <!-- Tombol Kembali -->
-        <div class="mt-5 text-center">
-            <a href="<?= base_url('/'); ?>" class="text-sm text-gray-400 hover:underline">← Kembali ke Halaman Utama</a>
+        <div class="mt-10 text-center text-sm text-gray-400">
+            © <?= date('Y'); ?> | Designed & Developed by <a href="https://instagram.com/rionel10" target="_blank" class="text-white font-medium hover:underline">Rionel</a>
         </div>
     </div>
 

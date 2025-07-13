@@ -73,6 +73,10 @@
 
     </div>
 
+    <div class="mb-5 text-center text-sm text-gray-700">
+        © <?= date('Y'); ?> | Designed & Developed by <a href="https://instagram.com/rionel10" target="_blank" class="text-black font-medium hover:underline">Rionel</a>
+    </div>
+
 
 </body>
 

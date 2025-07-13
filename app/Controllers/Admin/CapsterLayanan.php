@@ -6,18 +6,21 @@ use App\Controllers\BaseController;
 use App\Models\CapsterModel;
 use App\Models\LayananModel;
 use App\Models\CapsterLayananModel;
+use App\Models\ViewBookingModel;
 
 class CapsterLayanan extends BaseController
 {
     protected $capsterModel;
     protected $layananModel;
     protected $CapsterLayananModel;
+    protected $viewBookingModel;
 
     public function __construct()
     {
         $this->capsterModel = new CapsterModel();
         $this->layananModel = new LayananModel();
         $this->CapsterLayananModel = new CapsterLayananModel();
+        $this->viewBookingModel = new ViewBookingModel();
     }
 
     public function index()
@@ -166,6 +169,17 @@ class CapsterLayanan extends BaseController
 
     public function delete($id)
     {
+        // Cek apakah harga capster ini sudah digunakan dalam tabel booking
+        $hargaCapster = $this->viewBookingModel
+            ->where('id_harga_khusus', $id)
+            ->first();
+
+        if ($hargaCapster) {
+            session()->setFlashdata('pesan', 'Harga capster ini tidak dapat dihapus karena sudah digunakan dalam data booking.');
+            return redirect()->to('admin/capster_layanan');
+        }
+
+
         $capster_layanan = $this->CapsterLayananModel->find($id);
         if (!$capster_layanan) {
             session()->setFlashdata('pesan', 'Capster Layanan tidak ditemukan!');

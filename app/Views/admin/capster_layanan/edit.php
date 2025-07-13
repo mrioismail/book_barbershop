@@ -26,7 +26,7 @@
                     </ul>
                 <?php endif; ?>
 
-                <form action="<?= base_url('admin/capster_layanan/update/' . $capster_layanan['id']) ?>" method="post" enctype="multipart/form-data">
+                <form action="<?= base_url('admin/capster_layanan/update/' . $capster_layanan['id_capster_layanan']) ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field() ?>
 
                     <!-- Nama Capster -->
