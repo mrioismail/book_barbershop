@@ -15,7 +15,7 @@
             <div class="w-16 h-16 bg-green-500 mx-auto rounded-full flex items-center justify-center text-white text-3xl">
                 ✓
             </div>
-            <h2 class="text-2xl font-semibold mt-4">Rp<?= number_format($capsterLayanan[0]['harga'], 0, ',', '.'); ?></h2>
+            <h2 class="text-2xl font-semibold mt-4">Rp<?= number_format($harga); ?></h2>
             <p class="text-green-600 mt-2">Booking Berhasil!</p>
         </div>
 

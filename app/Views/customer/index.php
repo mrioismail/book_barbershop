@@ -38,7 +38,7 @@
                 <?php foreach ($capster as $c) : ?>
                     <div class="col-6 col-md-4 col-lg-3">
                         <div class="card h-100 shadow-sm border-0 rounded-4 bg-dark text-white">
-                            <img src="<?php echo base_url('customer/images/barber/portrait-male-hairdresser-with-scissors.jpg') ?>" alt="Capster" class="w-full h-40 md:h-48 lg:h-56 object-cover">
+                            <img src="<?php echo base_url('admin/assets/images/uploads/' . $c['foto_capster']) ?>" alt="Capster" class="w-full h-40 md:h-48 lg:h-56 object-cover">
                             <div class="card-body">
                                 <p class="card-text fw-semibold"><?= $c['nama']; ?></p>
                             </div>
@@ -66,7 +66,7 @@
             <?php foreach ($layanan as $l) : ?>
                 <div class="col-lg-6 col-12 mb-4">
                     <div class="services-thumb">
-                        <img src="<?php echo base_url('customer/images/services/woman-cutting-hair-man-salon.jpg') ?>" class="services-image img-fluid" alt="">
+                        <img src="<?php echo base_url('admin/assets/images/uploads/' . $l['foto_layanan']) ?>" class="services-image img-fluid" alt="Foto Layanan">
                         <div class="services-info d-flex align-items-end">
                             <h4 class="mb-0"><?= $l['nama_layanan']; ?></h4>
                         </div>

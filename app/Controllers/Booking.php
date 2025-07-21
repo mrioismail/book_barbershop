@@ -7,10 +7,11 @@ use App\Models\LayananModel;
 use App\Models\CapsterModel;
 use App\Models\JadwalModel;
 use App\Models\CapsterLayananModel;
+use App\Models\ViewBookingModel;
 
 class Booking extends BaseController
 {
-    protected $bookingModel, $layananModel, $capsterModel, $jadwalModel, $capsterLayananModel;
+    protected $bookingModel, $layananModel, $capsterModel, $jadwalModel, $capsterLayananModel, $viewBookingModel;
 
     public function __construct()
     {
@@ -19,6 +20,7 @@ class Booking extends BaseController
         $this->capsterModel = new CapsterModel();
         $this->jadwalModel = new JadwalModel();
         $this->capsterLayananModel = new CapsterLayananModel();
+        $this->viewBookingModel = new ViewBookingModel();
     }
 
     public function index()
@@ -168,8 +170,8 @@ class Booking extends BaseController
 
     public function detail($id)
     {
-        // Ambil data booking berdasarkan ID
-        $booking = $this->bookingModel->find($id);
+        // booking dari view_booking berdasarkan ID booking
+        $booking = $this->viewBookingModel->find($id);
 
         // Jika booking tidak ditemukan, tampilkan error 404
         if (!$booking) {
@@ -179,7 +181,15 @@ class Booking extends BaseController
         // Ambil data layanan dan capster yang berelasi
         $layanan = $this->layananModel->find($booking['layanan_id']);
         $capster = $this->capsterModel->find($booking['capster_id']);
-        $capsterLayanan = $this->capsterLayananModel->getCapsterLayanan();
+        $capsterLayanan = $this->capsterLayananModel->getCapsterLayanan(); // Ambil semua relasi // Ambil data 
+
+        // Cek harga yang tersedia
+        if ($booking['harga_khusus'] !== null) {
+            $harga = $booking['harga_khusus']; // Gunakan harga capster khusus
+        } else {
+            $harga = $booking['harga_umum']; // Gunakan harga umum dari layanan
+        }
+
 
         // admin WA-nya
         $noAdmin = '6289616640360';
@@ -188,7 +198,7 @@ class Booking extends BaseController
         $pesan .= "Nama: " . $booking['nama_customer'] . "\n";
         $pesan .= "No HP: " . $booking['no_hp'] . "\n";
         $pesan .= "Layanan: " . $layanan['nama_layanan'] . "\n";
-        $pesan .= "Harga: Rp " . number_format($capsterLayanan[0]['harga'], 0, ',', '.') . "\n";
+        $pesan .= "Harga: Rp " . number_format($harga) . "\n";
         $pesan .= "Capster: " . $capster['nama'] . "\n";
         $pesan .= "Tanggal: " . date('d M Y', strtotime($booking['tanggal'])) . "\n";
         $pesan .= "Jam: " . $booking['jam'] . "\n";
@@ -202,7 +212,7 @@ class Booking extends BaseController
             'booking' => $booking,
             'layanan' => $layanan,
             'capster' => $capster,
-            'capsterLayanan' => $capsterLayanan,
+            'harga' => $harga,
             'linkWA' => $linkWA,
         ];
 
