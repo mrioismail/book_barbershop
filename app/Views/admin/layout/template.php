@@ -21,12 +21,6 @@
 
     <!-- [Font] Family -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <!-- [phosphor Icons] https://phosphoricons.com/ -->
-    <link rel="stylesheet" href="<?php echo base_url('admin/assets/fonts/phosphor/duotone/style.css') ?>" />
-    <!-- [Tabler Icons] https://tablericons.com -->
-    <link rel="stylesheet" href="<?php echo base_url('admin/assets/fonts/tabler-icons.min.css') ?>" />
-    <!-- [Feather Icons] https://feathericons.com -->
-    <link rel="stylesheet" href="<?php echo base_url('admin/assets/fonts/feather.css') ?>" />
     <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
     <link rel="stylesheet" href="<?php echo base_url('admin/assets/fonts/fontawesome.css') ?>" />
     <!-- [Material Icons] https://fonts.google.com/icons -->
@@ -39,21 +33,6 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
-
-    <!-- jQuery buat datatables -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
-
-    <!-- Export dependencies buat datatables -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
 </head>
 <!-- [Head] end -->
@@ -124,6 +103,21 @@
         main_layout_change('vertical');
     </script>
 
+    <!-- jQuery buat datatables -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
+
+    <!-- Export dependencies buat datatables -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
     <!-- Data Tables -->
     <script>
         $(document).ready(function() {
@@ -178,6 +172,104 @@
         });
     </script>
 
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // notifikasi berhasil dan gagal
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        <?php if (session()->getFlashdata('pesan')) : ?>
+            Toast.fire({
+                icon: "success",
+                title: "<?= session()->getFlashdata('pesan') ?>"
+            });
+        <?php elseif (session()->getFlashdata('errors')) : ?>
+            Toast.fire({
+                icon: "error",
+                title: "<?= session()->getFlashdata('errors') ?>"
+            });
+        <?php endif; ?>
+
+        // Event listener umum untuk .btn-logout dan .btn-hapus
+        document.querySelectorAll('.btn-logout, .btn-hapus').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const isLogout = this.classList.contains('btn-logout');
+
+                Swal.fire({
+                    title: isLogout ? 'Keluar dari aplikasi?' : 'Yakin ingin menghapus data ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = href;
+                    }
+                });
+            });
+        });
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success me-2',
+                cancelButton: 'btn btn-secondary'
+            },
+            buttonsStyling: false
+        });
+
+        // Fungsi umum untuk konfirmasi SweetAlert
+        function handleSweetConfirm(selector, title, text, icon, confirmText) {
+            document.querySelectorAll(selector).forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const form = this.closest('form');
+
+                    swalWithBootstrapButtons.fire({
+                        title: title,
+                        text: text,
+                        icon: icon,
+                        showCancelButton: true,
+                        confirmButtonText: confirmText,
+                        cancelButtonText: 'Batal',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        }
+
+        // Terapkan ke tombol
+        handleSweetConfirm(
+            '.btn-selesai',
+            'Yakin bookingannya sudah selesai?',
+            'Booking ini akan ditandai sudah selesai.',
+            'question',
+            'Ya, selesai'
+        );
+
+        handleSweetConfirm(
+            '.btn-batal',
+            'Batalkan booking?',
+            'Booking ini akan dibatalkan dan tidak bisa dikembalikan.',
+            'warning',
+            'Ya, batalkan'
+        );
+    </script>
 
 </body>
 <!-- [Body] end -->

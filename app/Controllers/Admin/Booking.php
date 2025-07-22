@@ -65,7 +65,7 @@ class Booking extends BaseController
             return redirect()->back()
                 ->withInput()
                 ->with('errors', $this->validator->getErrors())
-                ->with('pesan', 'Gagal memperbarui status booking!');
+                ->with('errors', 'Gagal memperbarui status booking!');
             exit;
         }
 
@@ -83,18 +83,18 @@ class Booking extends BaseController
     {
         $booking = $this->bookingModel->find($id);
         if (!$booking) {
-            session()->setFlashdata('pesan', 'Booking tidak ditemukan!');
+            session()->setFlashdata('errors', 'Booking tidak ditemukan!');
             return redirect()->to('admin/booking');
         }
         // cek jika tanggal booking sudah lewat hari ini
         if (strtotime($booking['tanggal']) < time()) {
-            session()->setFlashdata('pesan', 'Gagal Hapus! Booking sudah lewat hari ini.');
+            session()->setFlashdata('errors', 'Gagal Hapus! Booking sudah lewat hari ini.');
             return redirect()->to('admin/booking/detail/' . $id);
         }
 
         // cek apakah booking sudah selesai
         if ($booking['status'] === 'selesai') {
-            session()->setFlashdata('pesan', 'Gagal Hapus! Status Booking sudah selesai.');
+            session()->setFlashdata('errors', 'Gagal Hapus! Status Booking sudah selesai.');
             return redirect()->to('admin/booking/detail/' . $id);
         }
 

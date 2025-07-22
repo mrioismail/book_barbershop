@@ -73,8 +73,7 @@
                                 Edit
                             </a>
                             <a href="<?= base_url('admin/layanan/delete/' . $layanan['id']) ?>"
-                                onclick="return confirm('Yakin ingin menghapus layanan ini?')"
-                                class="text-md px-3 py-1.5 rounded bg-red-600 text-danger hover:bg-red-700">
+                                class="btn-hapus text-md px-3 py-1.5 rounded bg-red-600 text-danger hover:bg-red-700">
                                 Hapus
                             </a>
                         </div>

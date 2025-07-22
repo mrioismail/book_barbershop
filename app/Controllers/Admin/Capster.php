@@ -94,7 +94,7 @@ class Capster extends BaseController
                 ->where('nama', $nama)
                 ->first();
             if ($cek_capster) {
-                session()->setFlashdata('pesan', 'Gagal! Nama capster sudah terdaftar.');
+                session()->setFlashdata('errors', 'Gagal! Nama capster sudah terdaftar.');
                 return redirect()->to('admin/capster/create')->withInput();
             }
             // jika validasi berhasil
@@ -155,7 +155,7 @@ class Capster extends BaseController
             ->where('id !=', $id)
             ->first();
         if ($cek_nama_capster) {
-            session()->setFlashdata('pesan', 'Gagal Edit! Nama capster sudah digunakan oleh capster lain.');
+            session()->setFlashdata('errors', 'Gagal Edit! Nama capster sudah digunakan oleh capster lain.');
             return redirect()->to('admin/capster/edit/' . $id)->withInput();
         }
 
@@ -226,7 +226,7 @@ class Capster extends BaseController
             ->where('capster_id', $id)
             ->first();
         if ($cek_capster) {
-            session()->setFlashdata('pesan', 'Gagal Hapus! Capster sudah di booking.');
+            session()->setFlashdata('errors', 'Gagal Hapus! Capster sudah di booking.');
             return redirect()->to('admin/capster/detail/' . $id)->withInput();
         }
 
@@ -239,7 +239,7 @@ class Capster extends BaseController
             $this->capsterModel->delete($id);
             session()->setFlashdata('pesan', 'Capster berhasil dihapus!');
         } else {
-            session()->setFlashdata('pesan', 'Capster tidak ditemukan!');
+            session()->setFlashdata('errors', 'Capster tidak ditemukan!');
         }
         return redirect()->to('admin/capster');
     }

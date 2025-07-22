@@ -136,11 +136,9 @@
                             ⬅ Kembali
                         </a>
 
-                        <!-- Kanan: Edit & Hapus -->
                         <div class="flex gap-2 mt-2 sm:mt-0">
                             <a href="<?= base_url('admin/booking/delete/' . $booking['id']) ?>"
-                                onclick="return confirm('Yakin ingin menghapus booking ini?')"
-                                class="text-md px-3 py-1.5 rounded bg-red-600 text-danger hover:bg-red-700">
+                                class="btn-hapus text-md px-3 py-1.5 rounded bg-red-600 text-danger hover:bg-red-700">
                                 Hapus
                             </a>
                         </div>

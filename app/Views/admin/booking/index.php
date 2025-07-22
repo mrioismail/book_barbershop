@@ -70,10 +70,9 @@
                                 <!-- Hilangkan tombol selesai jika status sudah selesai -->
                                 <?php if ($book['status'] !== 'selesai'): ?>
                                     <form action="<?= base_url('admin/booking/update/' . $book['id']) ?>" method="post" class="d-inline"
-                                        onsubmit="return confirm('Yakin bokingan nya sudah SELESAI?');">
                                         <?= csrf_field() ?>
                                         <input type="hidden" name="status" value="selesai">
-                                        <button type="submit" class="badge bg-success-600 text-white border-0 text-[11px] mb-1">Selesai</button>
+                                        <button type="submit" class="btn-selesai badge bg-success-600 text-white border-0 text-[11px] mb-1">Selesai</button>
                                     </form>
                                 <?php endif; ?>
 
@@ -83,7 +82,7 @@
                                         onsubmit="return confirm('Yakin ingin membatalkan booking ini?');">
                                         <?= csrf_field() ?>
                                         <input type="hidden" name="status" value="batal">
-                                        <button type="submit" class="badge bg-danger-600 text-white border-0 text-[11px]">Batal</button>
+                                        <button type="submit" class="btn-batal badge bg-danger-600 text-white border-0 text-[11px]">Batal</button>
                                     </form>
                                 <?php endif; ?>
                             </td>

@@ -81,7 +81,6 @@ class Pengguna extends BaseController
         return redirect()->to('admin/pengguna');
     }
 
-
     public function gantiPassword($id)
     {
         $data = [

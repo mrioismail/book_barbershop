@@ -163,7 +163,7 @@ class Booking extends BaseController
 
             // kalo cuman status nya di update tanpa menyaring capster, tanggal dan jam nya maka semua status di tabel jadwal juga ikut berubah maka dari itu harus pake where
 
-            session()->setFlashdata('pesan', 'Bookingan kamu berhasil!');
+            session()->setFlashdata('pesan', 'Anda memiliki bookingan baru!');
             return redirect()->to('customer/booking/detail/' . $id); // Arahkan ke halaman detail dari id getinsertID
         }
     }

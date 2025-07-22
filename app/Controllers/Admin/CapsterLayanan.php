@@ -175,14 +175,14 @@ class CapsterLayanan extends BaseController
             ->first();
 
         if ($hargaCapster) {
-            session()->setFlashdata('pesan', 'Harga capster ini tidak dapat dihapus karena sudah digunakan dalam data booking.');
+            session()->setFlashdata('errors', 'Harga capster ini tidak dapat dihapus karena sudah digunakan dalam data booking.');
             return redirect()->to('admin/capster_layanan');
         }
 
 
         $capster_layanan = $this->CapsterLayananModel->find($id);
         if (!$capster_layanan) {
-            session()->setFlashdata('pesan', 'Capster Layanan tidak ditemukan!');
+            session()->setFlashdata('errors', 'Capster Layanan tidak ditemukan!');
             return redirect()->to('admin/capster_layanan');
         }
 

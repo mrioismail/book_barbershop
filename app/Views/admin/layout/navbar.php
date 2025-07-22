@@ -90,8 +90,7 @@
                                 </a>
                                 <div class="grid my-3">
                                     <a href="<?= base_url('logout') ?>"
-                                        class="btn btn-outline-danger flex items-center justify-center"
-                                        onclick="return confirm('Apakah Anda yakin ingin logout?');">
+                                        class="btn-logout btn btn-outline-danger flex items-center justify-center">
                                         <svg class="pc-icon me-2 w-[22px] h-[22px]">
                                             <use xlink:href="#custom-logout-1-outline"></use>
                                         </svg>

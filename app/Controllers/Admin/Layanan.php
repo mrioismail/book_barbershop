@@ -102,7 +102,7 @@ class Layanan extends BaseController
                 ->first();
 
             if ($cek_layanan) {
-                session()->setFlashdata('pesan', 'Gagal! Nama layanan sudah terdaftar.');
+                session()->setFlashdata('errors', 'Gagal! Nama layanan sudah terdaftar.');
                 return redirect()->to('admin/layanan/create')->withInput();
             }
 
@@ -123,7 +123,7 @@ class Layanan extends BaseController
             return redirect()->to('admin/layanan');
         }
 
-        return redirect()->to('admin/layanan/index')->with('success', 'Layanan berhasil ditambahkan!');
+        return redirect()->to('admin/layanan/index')->with('pesan', 'Layanan berhasil ditambahkan!');
     }
 
     public function edit($id)
@@ -230,7 +230,7 @@ class Layanan extends BaseController
             ->where('layanan_id', $id)
             ->first();
         if ($cek_layanan) {
-            session()->setFlashdata('pesan', 'Gagal Hapus! Nama layanan sudah di booking.');
+            session()->setFlashdata('errors', 'Gagal Hapus! Nama layanan sudah di booking.');
             return redirect()->to('admin/layanan/detail/' . $id)->withInput();
         }
 
