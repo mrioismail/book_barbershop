@@ -42,7 +42,7 @@
         <hr class="my-4 border-secondary">
 
         <div class="text-center small text-secondary">
-            &copy; <?= date('Y') ?> Bills Barbershop - Dikembangkan oleh <span class="rionel">Rionel.</span>
+            &copy; <?= date('Y') ?> Bills Barbershop - Dikembangkan oleh <span class="rionel">MeetUin.</span>
         </div>
     </div>
 </footer>

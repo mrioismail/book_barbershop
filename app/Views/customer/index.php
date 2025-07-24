@@ -13,7 +13,10 @@
                 </p>
                 <br>
                 <a class="btn custom-btn custom-border-btn custom-btn-bg-white smoothscroll me-2 mb-2" href="#section_4">Harga</a>
-                <a class="btn custom-btn smoothscroll mb-2 " href="<?php echo base_url('customer/booking/form_booking') ?>">Booking</a>
+                <a class="btn custom-btn smoothscroll mb-2" target="_blank"
+                    href="https://wa.me/6282354884444?text=Halo%20saya%20ingin%20konsultasi%20terkait%20booking%20bills barbershop">
+                    Konsultasi
+                </a>
             </div>
         </div>
     </div>
@@ -33,25 +36,28 @@
                     <p>Di Bills Barbershop, kami percaya bahwa potongan rambut bukan cuma soal gaya—tapi tentang rasa percaya diri. Berawal dari semangat untuk menghadirkan pelayanan barbershop yang nyaman, rapi, dan profesional, kami hadir untuk bantu kamu tampil maksimal setiap hari. Dikerjakan oleh barber berpengalaman, dengan suasana yang santai dan bersih, kamu tinggal duduk, santai, dan siap jadi ganteng!</p>
                 </div>
             </div>
-            <h6 class="text-center mb-4">Tim Bills Barbershop</h6>
+            <h6 class="text-center mb-2 text-dark">Tim Bills Barbershop</h6>
             <div class="row g-4">
                 <?php foreach ($capster as $c) : ?>
                     <div class="col-6 col-md-4 col-lg-3">
-                        <div class="card h-100 shadow-sm border-0 rounded-4 bg-dark text-white">
-                            <img src="<?php echo base_url('admin/assets/images/uploads/' . $c['foto_capster']) ?>" alt="Capster" class="w-full h-40 md:h-48 lg:h-56 object-cover">
-                            <div class="card-body">
-                                <p class="card-text fw-semibold"><?= $c['nama']; ?></p>
-                            </div>
+                        <div class="card card-capster shadow-sm border-0 text-center p-3 bg-light rounded-4">
+                            <img src="<?= base_url('admin/assets/images/uploads/' . $c['foto_capster']) ?>"
+                                alt="Capster"
+                                class="rounded-circle mx-auto mb-3 shadow-sm"
+                                style="width: 80px; height: 80px; object-fit: cover;">
 
-                            <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2 pb-3 px-3">
-                                <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
-                                <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
-                                <a href="#" class="text-white"><i class="bi bi-whatsapp"></i></a>
+                            <h6 class="mb-1 text-dark fw-semibold"><?= $c['nama']; ?></h6>
+
+                            <div class="d-flex justify-content-center gap-3 mt-2">
+                                <a href="#" class="text-dark"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="text-dark"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="text-success"><i class="bi bi-whatsapp"></i></a>
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
+
         </div>
     </div>
 </section>
@@ -169,7 +175,7 @@
                         <h6 class="mb-0">
                             <i class="custom-icon bi-shop me-3"></i>
                             <strong>Buka Setiap Hari</strong>
-                            <span class="ms-auto">10:00 WIB - 21.00 WIB</span>
+                            <span class="ms-auto text-white">10:00 WIB - 21.00 WIB</span>
                         </h6>
                     </div>
                 </div>
